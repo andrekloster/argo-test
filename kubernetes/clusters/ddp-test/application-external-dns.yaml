@@ -13,6 +13,9 @@ spec:
     repoURL: https://github.com/andrekloster/argo-test.git
     targetRevision: main
     path: kubernetes/apps/external-dns
+    helm:
+      valueFiles:
+        - values.yaml
 
   destination:
     server: https://kubernetes.default.svc
