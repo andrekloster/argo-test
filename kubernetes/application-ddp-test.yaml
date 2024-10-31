@@ -1,0 +1,20 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ddp-test
+  namespace: argocd
+spec:
+  project: default
+
+  syncPolicy:
+    automated: {}
+
+  source:
+    repoURL: https://github.com/andrekloster/argo-test.git
+    targetRevision: main
+    path: kubernetes/clusters/ddp-test
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
