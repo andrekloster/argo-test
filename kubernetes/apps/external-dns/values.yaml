@@ -1,32 +1,33 @@
-provider:
-  # -- _ExternalDNS_ provider name; for the available providers and how to configure them see [README](https://github.com/kubernetes-sigs/external-dns/blob/master/charts/external-dns/README.md#providers).
-  name: webhook
-  webhook:
-    image:
-      # -- (string) Image repository for the `webhook` container.
-      repository: "ghcr.io/absaoss/external-dns-infoblox-webhook"
-      # -- (string) Image tag for the `webhook` container.
-      tag: "v1.1.1"
-      # -- Image pull policy for the `webhook` container.
-      pullPolicy: IfNotPresent
-    # -- [Environment variables](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/) for the `webhook` container.
-    env:
-      - name: INFOBLOX_HOST
-        value: "10.10.104.191"
-      - name: INFOBLOX_PORT
-        value: "80"
-      - name: INFOBLOX_WAPI_USER
-        valueFrom:
-          secretKeyRef:
-            name: infoblox-credentials
-            key: infoblox_wapi_user
-      - name: INFOBLOX_WAPI_PASSWORD
-        valueFrom:
-          secretKeyRef:
-            name: infoblox-credentials
-            key: infoblox_wapi_password
-      - name: INFOBLOX_VERSION
-        value: "2.3.1"
-    service:
-      # -- Webhook exposed HTTP port for the service.
-      port: 8888
+external-dns:
+  provider:
+    # -- _ExternalDNS_ provider name; for the available providers and how to configure them see [README](https://github.com/kubernetes-sigs/external-dns/blob/master/charts/external-dns/README.md#providers).
+    name: webhook
+    webhook:
+      image:
+        # -- (string) Image repository for the `webhook` container.
+        repository: "ghcr.io/absaoss/external-dns-infoblox-webhook"
+        # -- (string) Image tag for the `webhook` container.
+        tag: "v1.1.1"
+        # -- Image pull policy for the `webhook` container.
+        pullPolicy: IfNotPresent
+      # -- [Environment variables](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/) for the `webhook` container.
+      env:
+        - name: INFOBLOX_HOST
+          value: "10.10.104.191"
+        - name: INFOBLOX_PORT
+          value: "80"
+        - name: INFOBLOX_WAPI_USER
+          valueFrom:
+            secretKeyRef:
+              name: infoblox-credentials
+              key: infoblox_wapi_user
+        - name: INFOBLOX_WAPI_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: infoblox-credentials
+              key: infoblox_wapi_password
+        - name: INFOBLOX_VERSION
+          value: "2.3.1"
+      service:
+        # -- Webhook exposed HTTP port for the service.
+        port: 8888
